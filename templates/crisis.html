@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="page-head crisis-head">
+    <p class="eyebrow">{{ t.crisis_note }}</p>
+    <h1>{{ t.crisis_title }}</h1>
+    <p class="lead">{{ t.crisis_body }}</p>
+  </section>
+  <ul class="cards">
+    {% for h in items %}{% include "_helpline_card.html" %}{% endfor %}
+  </ul>
+{% endblock %}

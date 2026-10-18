@@ -1,0 +1,15 @@
+{% import "_icons.html" as i %}
+<li class="helpline{% if h.emergency_only %} is-emergency{% endif %}">
+  <div class="h-head">
+    <span class="badge">{{ i.icon('phone') }}</span>
+    <div>
+      <h2>{{ h.name[lang] }}</h2>
+      <p class="meta">{{ i.icon('clock') }}{{ h.hours[lang] }}</p>
+    </div>
+  </div>
+  <p class="desc">{{ h.description[lang] }}</p>
+  <a class="btn btn-primary" href="tel:{{ h.number|replace('-', '') }}">{{ i.icon('phone') }}{{ t.call }} {{ h.number }}</a>
+  {% if h.alt_number %}
+    <a class="alt" href="tel:{{ h.alt_number|replace('-', '') }}">{{ t.also }} {{ h.alt_number }}</a>
+  {% endif %}
+</li>

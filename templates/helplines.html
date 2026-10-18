@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="page-head">
+    <h1>{{ t.helplines_title }}</h1>
+    <p class="lead">{{ t.helplines_intro }}</p>
+  </section>
+  <ul class="cards">
+    {% for h in items %}{% include "_helpline_card.html" %}{% endfor %}
+  </ul>
+{% endblock %}

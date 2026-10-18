@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="page-head">
+    <h1>{{ t.calm_title }}</h1>
+    <p class="lead">{{ t.calm_intro }}</p>
+  </section>
+
+  <section class="panel" aria-labelledby="breath-title">
+    <h2 id="breath-title">{{ t.breathe_title }}</h2>
+    <div class="breath-wrap" aria-hidden="true"><div class="breath"></div></div>
+    <p class="breath-label" role="status">
+      <span class="lbl lbl-in">{{ t.breathe_in }}</span>
+      <span class="lbl lbl-out">{{ t.breathe_out }}</span>
+    </p>
+    <p class="hint">{{ t.breathe_hint }}</p>
+  </section>
+
+  <section class="panel" aria-labelledby="ground-title">
+    <h2 id="ground-title">{{ t.ground_title }}</h2>
+    <p class="hint">{{ t.ground_intro }}</p>
+    <ul class="ground">
+      <li>{{ t.g5 }}</li><li>{{ t.g4 }}</li><li>{{ t.g3 }}</li><li>{{ t.g2 }}</li><li>{{ t.g1 }}</li>
+    </ul>
+  </section>
+{% endblock %}

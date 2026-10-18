@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "_icons.html" as i %}
+{% block content %}
+  <section class="hero">
+    <p class="eyebrow">{{ t.hero_eyebrow }}</p>
+    <h1>{{ t.home_heading }}</h1>
+    <p class="lead">{{ t.home_intro }}</p>
+    <ul class="chips">
+      <li>{{ t.chip_free }}</li><li>{{ t.chip_private }}</li><li>{{ t.chip_247 }}</li>
+    </ul>
+    <div class="actions">
+      <a class="btn btn-light" href="{{ url_for('helplines', lang=lang) }}">{{ i.icon('phone') }}{{ t.btn_helplines }}</a>
+      <a class="btn btn-crisis" href="{{ url_for('crisis', lang=lang) }}">{{ i.icon('buoy') }}{{ t.btn_crisis }}</a>
+    </div>
+  </section>
+
+  <a class="calm-link" href="{{ url_for('calm', lang=lang) }}">
+    <span class="badge">{{ i.icon('wind') }}</span>
+    <span>{{ t.calm_cta }}</span>
+    {{ i.icon('arrow') }}
+  </a>
+
+  <section class="how" aria-labelledby="how-title">
+    <h2 id="how-title">{{ t.how_title }}</h2>
+    <div class="features">
+      <article class="feature">
+        <span class="badge">{{ i.icon('phone') }}</span>
+        <h3>{{ t.feat_free_title }}</h3><p>{{ t.feat_free_body }}</p>
+      </article>
+      <article class="feature">
+        <span class="badge">{{ i.icon('globe') }}</span>
+        <h3>{{ t.feat_lang_title }}</h3><p>{{ t.feat_lang_body }}</p>
+      </article>
+      <article class="feature">
+        <span class="badge">{{ i.icon('lock') }}</span>
+        <h3>{{ t.feat_private_title }}</h3><p>{{ t.feat_private_body }}</p>
+      </article>
+    </div>
+  </section>
+{% endblock %}

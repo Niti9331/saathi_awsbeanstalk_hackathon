@@ -1,0 +1,70 @@
+{% import "_icons.html" as i %}
+<!doctype html>
+<html lang="{{ lang }}" translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="google" content="notranslate">
+  {% if staging %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  <title>{{ t.app_name }} - {{ t.tagline }}</title>
+  <script>try{var s=localStorage.getItem('saathi-theme');if(s==='dark'||s==='light'){document.documentElement.dataset.theme=s}}catch(e){}</script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="page-{{ page }}">
+  {% if staging %}<div class="staging-banner" role="note">Draft for translation review. Not for public use. Helpline details are still being verified.</div>{% endif %}
+  <a class="skip" href="#main">{{ t.skip }}</a>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="{{ url_for('home', lang=lang) }}">
+        <span class="logo">{{ i.icon('heart') }}</span>{{ t.app_name }}
+      </a>
+      <nav class="tabbar" aria-label="Main">
+        <a href="{{ url_for('home', lang=lang) }}" {% if page == 'home' %}aria-current="page"{% endif %}>{{ i.icon('home') }}<span>{{ t.nav_home }}</span></a>
+        <a href="{{ url_for('helplines', lang=lang) }}" {% if page == 'helplines' %}aria-current="page"{% endif %}>{{ i.icon('phone') }}<span>{{ t.nav_helplines }}</span></a>
+        <a href="{{ url_for('calm', lang=lang) }}" {% if page == 'calm' %}aria-current="page"{% endif %}>{{ i.icon('wind') }}<span>{{ t.nav_calm }}</span></a>
+        <a class="urgent" href="{{ url_for('crisis', lang=lang) }}" {% if page == 'crisis' %}aria-current="page"{% endif %}>{{ i.icon('buoy') }}<span>{{ t.nav_crisis }}</span></a>
+      </nav>
+      <div class="tools">
+        <button id="theme-toggle" class="theme-btn" type="button" hidden aria-label="{{ t.theme_toggle }}" title="{{ t.theme_toggle }}">
+          <span class="i-moon">{{ i.icon('moon') }}</span><span class="i-sun">{{ i.icon('sun') }}</span>
+        </button>
+        <details class="langmenu">
+          <summary aria-label="Language">{{ i.icon('globe') }}<span>{{ lang_names[lang] }}</span></summary>
+          <div class="langlist">
+            {% for code in supported_langs %}
+              <a href="{{ url_for(page, lang=code) }}" lang="{{ code }}" hreflang="{{ code }}"
+                 {% if code == lang %}aria-current="true"{% endif %}>{{ lang_names[code] }}</a>
+            {% endfor %}
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p class="disclaimer">{{ t.disclaimer }}</p>
+  </footer>
+
+  <a class="quick-exit" href="https://www.google.com/" rel="noopener noreferrer"
+     onclick="location.replace(this.href);return false;">{{ i.icon('exit') }}<span>{{ t.quick_exit }}</span></a>
+
+  <script>
+  (function(){
+    var b=document.getElementById('theme-toggle'); if(!b) return;
+    b.hidden=false;
+    b.addEventListener('click',function(){
+      var r=document.documentElement;
+      var cur=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      var next=cur==='dark'?'light':'dark';
+      r.dataset.theme=next;
+      try{localStorage.setItem('saathi-theme',next)}catch(e){}
+    });
+  })();
+  </script>
+</body>
+</html>
